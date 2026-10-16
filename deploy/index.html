@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>QA Automation</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+  :root{
+    --bg:#f6f7f4;
+    --ink:#161a17;
+    --muted:#6f776f;
+    --accent:#159c52;
+    --faint:#e3e6e0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.55}
+
+  .wrap{max-width:1000px;margin:0 auto;padding:80px 32px 110px}
+
+  h1{font-size:clamp(2.1rem,5.2vw,3.5rem);font-weight:700;letter-spacing:-.028em;
+    line-height:1.04;max-width:18ch}
+  .sub{margin-top:20px;color:var(--muted);font-size:16.5px;max-width:58ch;line-height:1.65}
+
+  .actions{margin-top:30px;display:flex;gap:26px;flex-wrap:wrap;align-items:center}
+  .link{font-size:15px;font-weight:600;color:var(--accent);text-decoration:none}
+  .link:hover{text-decoration:underline;text-underline-offset:3px}
+  .link.plain{color:var(--ink)}
+
+  /* big plain numbers, no boxes */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin:72px 0 96px}
+  .stat .n{font-size:clamp(1.9rem,3.8vw,2.7rem);font-weight:700;letter-spacing:-.03em;
+    font-variant-numeric:tabular-nums;line-height:1;color:var(--accent)}
+  .stat .n.ink{color:var(--ink)}
+  .stat .l{margin-top:9px;font-size:12.5px;color:var(--muted)}
+
+  section{margin-bottom:88px}
+  h2{font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:30px}
+
+  /* suites: plain rows, no table borders */
+  .suite{display:grid;grid-template-columns:150px 1fr 92px;gap:24px;align-items:baseline;
+    padding:14px 0}
+  .suite .name{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;
+    color:var(--accent)}
+  .suite .desc{font-size:14.5px;color:var(--muted);line-height:1.55}
+  .suite .status{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--accent);
+    text-align:right;white-space:nowrap}
+
+  /* practices: two plain columns */
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+  .col h3{font-size:15px;font-weight:600;margin-bottom:16px}
+  .col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .col li{font-size:14.5px;color:var(--muted);line-height:1.55;padding-left:18px;position:relative}
+  .col li::before{content:'';position:absolute;left:0;top:.62em;width:6px;height:6px;
+    border-radius:50%;background:var(--accent)}
+
+  /* run steps: plain numbered lines */
+  .steps{display:flex;flex-direction:column;gap:14px}
+  .step{display:flex;gap:18px;align-items:baseline}
+  .step .k{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent);
+    font-weight:600;flex-shrink:0}
+  .step .v{font-size:14.5px;color:var(--muted);line-height:1.6}
+  .step code{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink);
+    background:var(--faint);padding:2px 7px;border-radius:4px}
+
+  footer{font-size:13.5px;color:var(--muted)}
+
+  @media(max-width:860px){
+    .stats{grid-template-columns:repeat(2,1fr);gap:34px}
+    .cols{grid-template-columns:1fr;gap:44px}
+    .suite{grid-template-columns:120px 1fr;gap:16px}
+    .suite .status{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>End-to-end tests that guard a real production app</h1>
+  <p class="sub">A Playwright suite that drives a live web application through its core
+    user journeys, using the Page Object Model across four browser targets.</p>
+
+  <div class="actions">
+    <a class="link" href="./report/">View the test report</a>
+    <a class="link plain" href="https://github.com/dutaalamin/qa-automation">Source code</a>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">13</div><div class="l">tests</div></div>
+    <div class="stat"><div class="n">100%</div><div class="l">passing</div></div>
+    <div class="stat"><div class="n ink">4</div><div class="l">browser targets</div></div>
+    <div class="stat"><div class="n ink">3</div><div class="l">test suites</div></div>
+  </div>
+
+  <section>
+    <h2>Coverage</h2>
+    <div class="suite">
+      <span class="name">smoke</span>
+      <span class="desc">The app loads, the word list renders, the stats bar is present.</span>
+      <span class="status">passing</span>
+    </div>
+    <div class="suite">
+      <span class="name">typing</span>
+      <span class="desc">WPM rises on correct input, accuracy holds, wrong keys are flagged,
+        backspace works, the timer counts down.</span>
+      <span class="status">passing</span>
+    </div>
+    <div class="suite">
+      <span class="name">features</span>
+      <span class="desc">Duration switching, restart resets state, theme picker,
+        and the results modal shows real numbers.</span>
+      <span class="status">passing</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>How it is built</h2>
+    <div class="cols">
+      <div class="col">
+        <h3>Design</h3>
+        <ul>
+          <li>Page Object Model keeps every selector in one place</li>
+          <li>Positive, negative and edge-case coverage</li>
+          <li>Polling instead of brittle fixed waits</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Delivery</h3>
+        <ul>
+          <li>GitHub Actions runs the suite on every push</li>
+          <li>Parallel matrix across four targets</li>
+          <li>Traces, video and screenshots captured on failure</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Run it locally</h2>
+    <div class="steps">
+      <div class="step"><span class="k">01</span><span class="v"><code>npm install</code> to install dependencies</span></div>
+      <div class="step"><span class="k">02</span><span class="v"><code>npx playwright install</code> to download browsers</span></div>
+      <div class="step"><span class="k">03</span><span class="v"><code>npm test</code> to run the full suite</span></div>
+      <div class="step"><span class="k">04</span><span class="v"><code>BASE_URL=... npm test</code> to target another environment</span></div>
+    </div>
+  </section>
+
+  <footer>QA Automation. Portfolio project by Duta Alamin.</footer>
+</div>
+</body>
+</html>
